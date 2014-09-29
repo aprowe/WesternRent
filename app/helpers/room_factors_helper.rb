@@ -1,0 +1,2 @@
+module RoomFactorsHelper
+end

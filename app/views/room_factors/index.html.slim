@@ -1,0 +1,19 @@
+h1 Listing room_factors
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @room_factors.each do |room_factor|
+      tr
+        td = link_to 'Show', room_factor
+        td = link_to 'Edit', edit_room_factor_path(room_factor)
+        td = link_to 'Destroy', room_factor, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Room factor', new_room_factor_path

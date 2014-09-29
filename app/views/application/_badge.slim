@@ -1,0 +1,23 @@
+.badge-container.box id="id-#{renter.id}"
+	.column#left
+		.picture
+	.column#right
+		.name #{renter.name}
+		.room #{renter.room}
+		.row
+			.rent-amount $#{renter.rent}
+			-if renter.paid
+				.status.paid title="Payment Recieved" paid
+			-else
+				.status.unpaid unpaid
+
+		/*.rent-paid Paid: #{renter.paid}*/
+	.clear
+
+
+
+
+css:
+	#id-#{renter.id} .picture{
+		background-image: url('assets/default.png');
+	}

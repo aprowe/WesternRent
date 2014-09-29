@@ -1,0 +1,15 @@
+/ .box #{simple_format @post.to_yaml}
+.header Western Court Castle
+.content#renters
+	- clear = true
+	- @renters.each do |renter|
+		- clear = !clear;
+		= render 'badge', :renter => renter
+		- if clear
+			.clear
+
+.content#utilities
+	.header Utilities This Month:
+	.equation.box $0.00
+	.info Pay to Wade Hastings
+	.clear
