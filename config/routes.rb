@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :room_factors
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
@@ -10,7 +8,10 @@ Rails.application.routes.draw do
   root 'application#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  get 'login' => 'application#login'
+  get 'logout' => 'application#logout'
+  get 'resetRent' => 'application#resetRent'
+  get 'calcRent' => 'application#calcRent'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

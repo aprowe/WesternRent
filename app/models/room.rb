@@ -10,7 +10,7 @@ class Room < ActiveRecord::Base
 
 
 	def num_renters
-		renters = Renter.where(:room_id => self.id).count
+		renters = Renter.where(room_id: self.id).count
 
 		if renters == 0
 			renters = 1

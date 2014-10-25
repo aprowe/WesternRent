@@ -1,0 +1,14 @@
+@import "colors";
+
+#admin-panel {
+	text-align: center;
+	width: 250px;
+	float: left;
+}
+
+#admin-panel button {
+	display: inline-block;
+	font-family: inherit;
+	font-size: 10pt;
+	/*float: right;*/
+}

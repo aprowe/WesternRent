@@ -1,6 +1,6 @@
 ActiveAdmin.register Room do
 
-  permit_params :description, :rent, :area, :rentable, :renter_id
+  permit_params :description, :rent, :area, :rentable
   form do |f|
     f.inputs # Include the default inputs
     f.inputs "Categories" do
@@ -13,7 +13,6 @@ ActiveAdmin.register Room do
 
     	def update
 
-          logger.debug params[:room][:area]
         	room = Room.find(params[:id])
         	room.factors.delete_all
         	factors = params[:room][:factor_ids]
@@ -22,10 +21,10 @@ ActiveAdmin.register Room do
           	  room.factors << Factor.find(factor_id.to_i)
         	end
 
-          room.area = params[:room][:area]
-          room.rent = params[:room][:rent]
-          room.rentable = params[:room][:rentable]
-          room.save
+          room.update(description: params[:room][:description])
+          room.update(rent: params[:room][:rent])
+          room.update(area: params[:room][:area])
+          room.update(rentable: params[:room][:rentable])
 
         redirect_to resource_path(room)
     	end

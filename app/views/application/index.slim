@@ -1,5 +1,13 @@
 / .box #{simple_format @post.to_yaml}
-.header Western Court Castle
+
+= render 'header'
+
+/- unless session[:user] 
+/	= render 'login'
+
+- if @adminUser
+	= render 'adminPanel'
+
 .content#renters
 	- clear = true
 	- @renters.each do |renter|
@@ -9,7 +17,8 @@
 			.clear
 
 .content#utilities
-	.header Utilities This Month:
-	.equation.box $0.00
-	.info Pay to Wade Hastings
+	.title Make checks out to 
+	.equation.box Alexander Rowe
+	.info aprowe@ucsc.edu
 	.clear
+

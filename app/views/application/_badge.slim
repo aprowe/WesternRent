@@ -8,8 +8,9 @@
 			.rent-amount $#{renter.rent}
 			-if renter.paid
 				.status.paid title="Payment Recieved" paid
-			-else
-				.status.unpaid unpaid
+			-else				
+				= render 'paypal', renter: renter
+
 
 		/*.rent-paid Paid: #{renter.paid}*/
 	.clear
@@ -21,3 +22,5 @@ css:
 	#id-#{renter.id} .picture{
 		background-image: url('assets/default.png');
 	}
+
+

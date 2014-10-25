@@ -1,25 +1,2 @@
 @import "colors";
 
-.content#utilities {
-	text-align: center;
-
-	.header {
-		float:left; 
-		width: 300px;
-		font-size: 30px;
-	}
-
-	.equation {
-		float:left;
-		padding:3px;
-		text-align: center;
-		font-size: 40pt;
-		font-weight: bold;
-		line-height: 50pt;
-	}
-
-	.info {
-		display: block;
-		color: $color3;
-	}
-}

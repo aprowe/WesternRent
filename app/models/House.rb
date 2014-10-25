@@ -71,7 +71,7 @@ class House < ActiveRecord::Base
             end
         end
 
-        return trim
+        return calc_total_rent
     end
 
     def calc_rents
