@@ -2,8 +2,8 @@
 
 = render 'header'
 
-/- unless session[:user] 
-/	= render 'login'
+/ - if @login
+/ 	= render 'login'
 
 - if @adminUser
 	= render 'adminPanel'
@@ -19,6 +19,6 @@
 .content#utilities
 	.title Make checks out to 
 	.equation.box Alexander Rowe
-	.info aprowe@ucsc.edu
+	.info <strong>paypal:</strong> aprowe@ucsc.edu
 	.clear
 

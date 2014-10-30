@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def adminLogin
+    session[:user] = 'Alexander Rowe'
+    redirect_to ''
+  end
+
+
   def login
     user = Renter.find_by_name(params[:username])
 
