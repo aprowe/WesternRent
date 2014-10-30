@@ -14,6 +14,18 @@ class ApplicationController < ActionController::Base
     redirect_to ''
   end
 
+  def userPaid
+    if params[:id]
+      renter = Renter.find( params[:id] )
+      renter.paid = !renter.paid
+      renter.save
+      render text: 'success'
+      return
+    end
+
+    render text: 'fail'
+  end
+
 
   def login
     user = Renter.find_by_name(params[:username])
