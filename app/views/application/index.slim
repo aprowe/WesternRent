@@ -1,24 +1,76 @@
 / .box #{simple_format @post.to_yaml}
 
-= render 'header'
+#slider
+
+a#logout href='logout' logout
+a#settings.fa.fa-cog
+
+#log
+
+#content
+	#left-content.column
+		- if @admin
+			#admin-panel
+		
+		#activity
+
+	#right-content.column
+		= render 'profile', renter: @user
+
+		- @renters.each do |renter|
+			= render 'profile', renter: renter, small: true
+
+#settings-bar
+	-if @admin 
+		a.message-all text everyone
+
+
+coffee:
+	$('.paid-link').click ->
+		id = $(this).closest('.profile').attr('profile')
+		$.ajax
+			url: 'userPaid'
+			data:
+				id: id
+			success: =>
+				$(this).closest('.profile')
+				.find('.paid, .unpaid').toggleClass('paid')
+				.toggleClass('unpaid');
+
+
+	$('#settings-bar').slider($('#settings'))
+
+- if @admin
+	coffee:
+		$('.phone .number').addClass('messager').click ->
+			$.ajax
+				url: 'messageUser'
+				data:
+					renter_id: $(this).id()
+				success: (data)->
+					$('#log')
+					.append('<div class=".row"></div>')
+					.html(data)
+
+/ = render 'header'
 
 / - if @login
 / 	= render 'login'
 
-- if @adminUser
-	= render 'adminPanel'
+/ - if @adminUser
+/ 	= render 'adminPanel'
 
-.content#renters
-	- clear = true
-	- @renters.each do |renter|
-		- clear = !clear;
-		= render 'badge', :renter => renter
-		- if clear
-			.clear
+/ .content#renters
+/ 	- clear = true
+/ 	- @renters.each do |renter|
+/ 		- clear = !clear;
+/ 		= render 'badge', :renter => renter
+/ 		- if clear
+/ 			.clear
 
-.content#utilities
-	.title Make checks out to 
-	.equation.box Alexander Rowe
-	.info <strong>paypal:</strong> aprowe@ucsc.edu
-	.clear
+/ .content#utilities
+/ 	.title Make checks out to 
+/ 	.equation.box Alexander Rowe
+/ 	.info <strong>paypal:</strong> aprowe@ucsc.edu
+/ 	.clear
 
