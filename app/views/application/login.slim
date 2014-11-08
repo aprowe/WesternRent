@@ -1,0 +1,10 @@
+.banner fuckin Western Court Castle
+
+.login-box
+	.header Login
+	= form_tag({action: 'login', method: 'get'}) do
+		= text_field_tag 'username'
+		= password_field_tag 'password'
+		= submit_tag 'submit'
+	- if @error
+		.row #{@error}

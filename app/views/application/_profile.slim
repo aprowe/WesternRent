@@ -1,0 +1,70 @@
+
+- small ||= false
+
+- small_class = 'small' if small
+
+
+.profile class='#{small_class}' profile='#{renter.id}'
+	.image style="background-image: url('#{renter.image_path}')"
+		- if not small
+			.screen
+				a.fa.fa-upload.upload-button
+
+	.info
+		.name 
+			| #{renter.name}
+		.room 
+			i.fa.fa-home
+			| #{renter.room}
+		.phone
+			i.fa.fa-phone
+			.number #{renter.phone}
+			- if not small
+				a.fa.fa-edit.edit
+
+		.price
+			i.fa.fa-usd
+			.amount #{renter.rent}
+			- if @admin
+				a.fa.fa-check.paid-link.edit 
+			.status class='#{renter.status}'
+				- if renter.paid
+					span.fa.fa-check
+				- else
+					span.fa.fa-times
+
+- if not small
+	.phone-field.row
+		label Phone
+		input#phone type='text' value="#{@user.phone}"
+		input#id type='hidden' value="#{@user.id}"
+		span.button.submit Save
+
+	coffee:
+		$('.phone-field .submit').click ->
+			val = $(this).siblings('#phone').val()
+			id = $(this).siblings('#id').val()
+			$.ajax
+				url: 'updatePhone'
+				data:
+					id: id
+					phone: val
+				success: (data)=>
+					$('.profile').not('.small')
+					.find('.phone .number')
+					.html(val)
+					.animate
+						color: 'green'
+					, 100
+
+
+					$('#slider').close();
+
+	.uploader
+		= form_tag({action: :upload}, multipart: true) do
+			= file_field_tag 'picture'
+			= submit_tag 'submit', class: 'submit', value: 'click to upload'
+
+	coffee:
+		$('.uploader').slider( $('.profile .image .upload-button') )
+		$('.phone-field').slider( $('.profile .phone .edit') )

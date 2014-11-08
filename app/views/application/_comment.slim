@@ -1,0 +1,8 @@
+.post
+	.image style="background-image: url('#{comment.renter.image_path}')"
+	.content
+		.row
+			.name #{comment.renter.name}
+			.time timestamp="#{comment.created_at.in_time_zone.to_i * 1000}"
+		.row 
+				.message #{comment.message}

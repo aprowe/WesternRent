@@ -1,0 +1,30 @@
+/ form#paypal action="https://www.paypal.com/cgi-bin/webscr" method="post" target="paypal"
+/ 	input type="hidden" name="cmd" value="_send-money"
+	/ input type="hidden" name="email" value="aprowe@ucsc.edu"
+	/ input type="hidden" name="lc" value="US"
+	/ input type="hidden" name="item_name" value="Rent"
+	/ input type="hidden" name="amount" value="#{renter.room.rent}"
+	/ input type="hidden" name="currency_code" value="USD"
+	/ input type="hidden" name="country" value="United States"
+	/ input type="hidden" name="button_subtype" value="services"
+	/ input type="hidden" name="tax_rate" value="0.000"
+	/ input type="hidden" name="shipping" value="0.00"
+	/ input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynow_LG.gif:NonHosted"
+a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_send-money&email=aprowe@ucsc.edu&amount=10.00" target="_blank"
+	input.submit type="submit" value="Pay Now"
+
+
+scss:
+	form {
+		display:inline;
+	}
+	.submit {
+		display:inline !important;
+		float:right !important;
+		cursor: pointer;
+		border: none;
+		font-size: 80%;
+		padding: 3px;
+		line-height: 100%;
+		margin: 0px;
+	}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140928083919) do
+ActiveRecord::Schema.define(version: 20140928083917) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -46,13 +46,6 @@ ActiveRecord::Schema.define(version: 20140928083919) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
-  create_table "comments", force: true do |t|
-    t.integer  "renter_id"
-    t.string   "message"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "factors", force: true do |t|
     t.string   "name"
     t.decimal  "amount"
@@ -77,7 +70,6 @@ ActiveRecord::Schema.define(version: 20140928083919) do
     t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password"
   end
 
   create_table "room_factors", force: true do |t|

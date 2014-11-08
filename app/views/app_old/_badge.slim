@@ -1,0 +1,44 @@
+.badge-container.box id="id-#{renter.id}"
+	.column#left
+		.picture
+	.column#right
+		.name #{renter.name}
+		.room #{renter.room}
+		.row
+			.rent-amount $#{renter.rent}
+			-if renter.paid
+				.status.paid title="Payment Recieved" paid
+					
+
+			-else				
+				= render 'paypal', renter: renter
+
+			-if @adminUser
+				javascript:
+					$(function(){
+						$('#id-#{renter.id} .rent-amount').click(
+						function(){
+							$.ajax({
+								url: 'userPaid',
+								data: {id: '#{renter.id}'},
+								success: function(){
+									$('#id-#{renter.id}').append('<div>Status Changed</div>');
+								}
+							});
+						}
+						).css('cursor','pointer');
+					});
+
+
+		/*.rent-paid Paid: #{renter.paid}*/
+	.clear
+
+
+
+
+css:
+	#id-#{renter.id} .picture{
+		background-image: url('assets/default.png');
+	}
+
+

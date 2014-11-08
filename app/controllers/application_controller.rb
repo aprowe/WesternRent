@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def index
 
-    @user = Renter.find_by_name( session[:user] )
+    @user = self.user
 
     if not @user
       return redirect_to action: 'login'
@@ -24,6 +24,25 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def user
+    return Renter.find_by_name( session[:user] )
+  end
+
+
+  def post
+    if not params[:message]
+      return;
+    end
+
+    comment = Comments.create
+    comment.renter_id = self.user.id
+    comment.message = params[:message]
+    comment.save
+
+    render partial: 'comment', locals: {comment: comment}
+    return
+  end
+
   def adminLogin
     session[:user] = 'Alexander Rowe'
     redirect_to ''
@@ -34,6 +53,18 @@ class ApplicationController < ActionController::Base
     renter.phone = params[:phone]
     renter.save
     render text: 'ok'
+  end
+
+  def changePassword
+    if params[:password]
+      user = self.user
+      user.password = params[:password]
+      user.save
+      render text: "password changed to #{user.password}"
+      return
+    end
+
+    render text: 'No password supplied'
   end
 
   def userPaid
@@ -85,15 +116,22 @@ class ApplicationController < ActionController::Base
 
 
   def login
-    user = Renter.find_by_name( params[:username] )
+    @error = ''
 
-    if user
-        session[:user] = user
-        redirect_to ''
-        return
-    end
+    if params[:username]
+      user = Renter.find_by_name( params[:username] )
+
+      if user and user.password == params[:password]
+          session[:user] = user
+          redirect_to ''
+          return
+      end
     
+      @error = 'incorrect name or password'
+    end
+
   end
+
 
   def upload
     user = Renter.first

@@ -1,0 +1,136 @@
+
+$height: 150px;
+$activity: 300px;
+$profile: 500px;
+
+body {
+	background: #262f61;
+	color: white;
+	font-family: source sans pro;
+	padding: 15px;
+}
+
+#content {
+	width: $activity + $profile + 300px;
+	margin: auto;
+}
+
+#right-content {
+	float: left;
+	width: 600px;
+	// background: red;
+}
+
+
+#activity {
+	float: left;
+	width: $activity;
+	height: 600px;
+	border: 1px solid white;
+}
+
+@mixin profile($size) {
+	float: left;
+	width: $profile;
+	// border: 1px solid white;
+
+
+	.image {
+		display: inline-block;
+		background: white;
+		margin: 10px * $size;
+		width: $height * $size;
+		height: $height * $size;
+		border-radius: 2px;
+		float: left;
+	}
+
+		.screen {
+			position: absolute;
+			height: $height;
+			width: $height;
+
+			.fa {
+				display: none;
+				color: black;
+				position: relative;
+				top: $height - 25px;
+				left: $height - 25px;
+			}
+
+			&:hover .fa {
+				display: block;
+			}
+		}
+
+	h1 {
+		font-size: 40pt * $size;
+		margin-bottom: 5px * $size;
+		margin-top: 0px;
+	}
+
+
+.info {
+	display: inline-block;
+	float: left;
+	vertical-align: bottom;
+	.row {
+		color: #DDD;
+
+		&.phone {
+			a.edit {
+				display: inline-block;
+				opacity: 0;
+				margin-left: 10px ;
+			}
+
+			&:hover {
+				a.edit {
+					opacity: 1.0 ;
+				}
+			}
+		}
+
+		.fa {
+			width: 15px;
+			margin-right: 10px ;
+		}
+	}
+}
+	.amount  {
+		color: #dfd21f;
+		font-size: 30pt * $size;
+		display: inline;
+		font-weight: 700 ;
+	}
+
+	.paid  {
+		color: #2dc100;
+		margin-left: 10px;
+		display: inline ;
+	}
+
+	.unpaid {
+		@extend .paid;
+		color: red ;
+	}
+
+}
+
+.profile {
+	@include profile(1.0);
+	margin-bottom: 15px;
+}
+
+.profile.small {
+	@include profile(0.5);
+	font-size: 70%; 
+
+	width: $profile * 0.6;
+	margin-bottom: 15px;
+
+	h1 {
+		font-size: 15pt;
+	}
+
+}

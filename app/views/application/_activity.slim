@@ -1,0 +1,45 @@
+
+
+#activity
+
+	.post-field
+		textarea placeholder="leave a comment"
+		.submit submit
+		.clear
+
+	.comments
+		- Comments.all.reverse_order.take(20).each do |comment|
+			= render 'comment', comment: comment
+
+coffee:
+
+	updateTime = ->
+		$('.post .time').each ->
+			date = $(this).attr('timestamp')
+			date = parseInt(date)
+			date = moment(date).fromNow()
+			$(this).html(date)
+		
+	updateTime()
+
+	Loop = ->
+		setTimeout ->
+			updateTime()
+			Loop()
+		, 5000
+
+	Loop()
+
+
+	$('.post-field .submit').click ->
+		$.ajax
+			url: 'post'
+			data:
+				message: $('.post-field textarea').val()
+			success: (data)->
+				$('.post-field textarea').val('')
+				$('#activity .comments')
+				.prepend $(data).css('opacity', 0).animate
+					opacity: 1
+				, 300
+

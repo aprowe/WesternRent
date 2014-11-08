@@ -11,8 +11,7 @@ a#settings.fa.fa-cog
 	#left-content.column
 		- if @admin
 			#admin-panel
-		
-		#activity
+		= render 'activity'
 
 	#right-content.column
 		= render 'profile', renter: @user
@@ -21,8 +20,24 @@ a#settings.fa.fa-cog
 			= render 'profile', renter: renter, small: true
 
 #settings-bar
+	.submit
+	a.change-password.right change password
+	input.password
+	coffee:
+		$('#settings-bar .change-password').click ->
+			input = $('#settings-bar').find('input').slideToggle()
+			if input.val()
+				$.ajax
+					url: 'changePassword'
+					data: 
+						password: input.val()
+					success: (data)->
+						input.val('')
+						$('#log').append(data);
+
 	-if @admin 
 		a.message-all text everyone
+
 
 
 coffee:

@@ -1,0 +1,114 @@
+/*
+ *= require_tree ./partial
+ *= require_tree ./fonts
+ *= require font-awesome
+ *= require_self
+ */
+
+@import "partial/colors";
+@import "partial/badge";
+@import "partial/header";
+@import "partial/normalize";
+
+
+@font-face {
+  font-family: 'museo';
+  src: 
+       url('fonts/Museo500-Regular.woff') format('woff'),
+       url('fonts/Museo500-Regular.otf')  format('truetype')
+}
+
+body {
+	background-image: url('/assets/back.png');
+	font-family: 'museo', 'Source Sans pro', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+	font-size: 12pt;
+	margin: 0px;
+}
+
+.clear {
+	clear: both;
+}
+
+.content {
+	width: 715px;
+	margin:auto;
+	margin-bottom: 20px;
+	padding: 15px;
+	border-radius: 0px 0px 3px 3px;
+	background-color: darken(rgba($color5, .5), 50%);
+}
+
+.title {
+	color: $color3;
+	font-size: 50pt;
+	line-height: 50pt;
+	font-weight: 700;
+	text-align: center;
+	display: block;
+	padding-right: 35px;
+	/*text-shadow: 0px 0px 5px grey;*/
+}
+
+.content#utilities {
+	text-align: center;
+
+	.title {
+		margin-top: 20px;
+		float:left; 
+		width: 300px;
+		font-size: 30px;
+	}
+
+	.equation {
+		float:left;
+		padding:3px;
+		text-align: center;
+		font-size: 40pt;
+		font-weight: bold;
+		line-height: 50pt;
+	}
+
+	.info {
+		float:left;
+		color: $color3;
+	}
+}
+
+.box {
+	display: inline-block;
+	
+	background-color: $color3;
+	border-radius: 1px;
+	color: $color2;
+
+	padding: 2px;
+	margin: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+input {
+	border-radius: 2px;
+	border: none;
+	padding: 2px;
+	font: inherit;
+	color:inherit;
+	margin:3px;
+}
+
+input[type="text"], input[type="password"]{
+}
+
+input[type="submit"], button {
+	cursor: pointer;
+	background-color: $color2;
+	color: white;
+	border: 1px solid black;
+	border-radius: 15px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+@import "profile";

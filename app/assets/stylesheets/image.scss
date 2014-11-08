@@ -1,0 +1,51 @@
+scss:
+	.image {
+		.screen{
+			position: absolute;
+			width: 150px;
+			height: 150px;
+
+			& .fa-upload {
+				position: absolute;
+				width: 10px;
+				height: 10px;
+				top: 10px;
+				left: 10px;
+				opacity: 0;
+			}
+			&:hover {
+				& .fa-upload {
+					opacity: 1.0;
+				}
+			}
+
+			.submit {
+				@extend .fa-upload;
+				left: 60px;
+				width: auto;
+				height: auto;
+				border-radius: 3px;
+				border: none;
+			}
+
+
+		}
+	}
+
+	.editable {
+		.fa-edit {
+			margin-left: 10px;
+			opacity: 0.0;
+		}
+
+		&:hover {
+			.fa-edit {
+				opacity: 1.0;
+			} 
+		}
+
+	}
+
+	.uploader {
+		display: none;
+	}

@@ -1,0 +1,98 @@
+@import "partial/colors";
+
+#activity {
+	$border: 1px solid rgba(black, 0.5);
+
+	box-sizing: border-box;
+	border: $border;
+	border-radius: 2px;
+	width: 100%;
+	height: 1200px;
+	overflow: hidden;
+
+	.post-field {
+		width: 100%;
+		margin-bottom: 10px;
+
+		border-bottom: $border;
+
+		textarea {
+			box-sizing: border-box;
+			border-radius: 2px;
+
+			width: 100%;
+			height: 5em;
+			padding: 5px;
+
+			transition: all .2s;
+
+			resize: none;
+			opacity: 0.5;
+			&:focus {
+				opacity: 1.0;
+				height: 5em;
+			}
+		}
+
+		.submit {
+			@include hover;
+			float: right;
+			margin: 3px;
+			margin-bottom: 10px;
+			margin-right: 10px;
+		}
+
+		.clear {
+			clear: both;
+		}
+	}
+
+	.post {
+		box-sizing: border-box;
+		width: 100%;
+
+		padding:10px;
+
+		&:nth-child(even) {
+			background: darken($blue,5%);
+		}
+
+		&:nth-child(odd) {
+
+		}
+
+		.image {
+			box-sizing: border-box;
+			display: inline-block;
+			@include image;
+
+			width: 15%;
+			
+			border-radius: 50%;
+
+			padding-bottom: 15%;
+		}
+
+		.content {
+			vertical-align: top;
+			box-sizing: border-box;
+			display: inline-block;
+			width: 85%;
+			padding-left: 10px;
+
+			.name {
+				display: inline-block;
+				font-weight: 100;
+			}
+
+			.time {
+				display: inline-block;
+				opacity: 0.8;
+				font-size: 80%;
+				float: right;
+			}
+
+		}
+	}
+}
+	

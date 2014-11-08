@@ -1,0 +1,154 @@
+@import "partial/colors";
+
+
+.profile {
+	$image: 35%;
+	box-sizing: border-box;
+	padding: 5px;
+	width: 100%;
+	font-size: 150%;
+
+	&.small {
+		display: inline-block;
+		// $image: $image / 2;
+		font-size: 85%;
+		width: 50%;
+	}
+
+	.image {
+		display: inline-block;
+		width: $image;
+		padding-bottom: $image;
+		@include image;
+
+		border-radius: 3px;
+
+		.screen{
+			position: absolute;
+			width: 150px;
+			height: 150px;
+
+			& .fa-upload {
+				position: absolute;
+				width: 10px;
+				height: 10px;
+				top: 10px;
+				left: 10px;
+				opacity: 0;
+			}
+			&:hover {
+				& .fa-upload {
+					opacity: 1.0;
+				}
+			}
+
+			.submit {
+				@extend .fa-upload;
+				left: 60px;
+				width: auto;
+				height: auto;
+				border-radius: 3px;
+				border: none;
+			}
+
+
+		}
+	}
+
+	.edit {
+		margin-left: 10px;
+		opacity: 0.0;
+		display: none
+	}
+
+	:hover > .edit {
+		opacity: 1.0;
+		display: inline;
+	}
+
+
+	.uploader {
+		display: none;
+	}
+
+	.info {
+		display: inline-block;
+		box-sizing: border-box;
+
+		width: 100% - $image;
+		height: 100%;
+		padding-left: 2.5%;
+
+		vertical-align: top;
+
+		.row {
+			.fa {
+				width: 10%;
+			}
+
+			white-space: nowrap;
+			width: 100%;
+		}
+
+		.name {
+			@extend .row;
+			font-size: 180%;
+		}
+
+		.room {
+			@extend .row;
+		}
+
+		.phone {
+			@extend .row;
+
+			.number {
+				&.messager {
+					@include hover;
+				}
+
+				display: inline-block;
+			}
+		}
+
+		.price {
+			@extend .row;
+			color: $yellow;
+			.fa-usd {
+				position:relative;
+				top: -5px;
+				width: 5%;
+				margin-bottom: 5px;
+			}
+			.amount {
+				font-size: 200%;
+				display: inline-block;
+				width: 25%;
+				font-weight: bold;
+			}
+		}
+
+		.status {
+			display: inline-block;
+			font-size: 100%;
+			margin-left: 12px;
+
+			&.paid {
+				color: $green;
+				&:after {
+					margin-left: 14px;
+					content: 'paid';
+				}
+			}
+
+			&.unpaid {
+				color: $red;
+				&:after {
+					margin-left: 12px;
+					content: 'unpaid';
+				}				
+			}
+		}
+
+	}
+}

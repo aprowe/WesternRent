@@ -7,6 +7,7 @@ class CreateRenters < ActiveRecord::Migration
       t.boolean :paid
       t.belongs_to :room
 
+
       t.timestamps
     end
   end

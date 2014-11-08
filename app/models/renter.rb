@@ -1,6 +1,6 @@
 class Renter < ActiveRecord::Base
 	belongs_to :room, -> {where rentable: true}
-
+	has_many :comments;
 	# before_save :default
 
 

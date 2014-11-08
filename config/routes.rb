@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   get 'messageUser' => 'application#messageUser'
 
+  get 'post' => 'application#post'
+
+  get 'changePassword' => 'application#changePassword'
+
   get 'resetRent' => 'application#resetRent'
   get 'calcRent' => 'application#calcRent'
   get 'adminLogin' => 'application#adminLogin'

@@ -17,3 +17,8 @@ $darkGray: #3b3b3b;
 		color: $yellow;
 	}
 }
+
+@mixin image() {
+	background-size: cover;
+	background-position: center;
+}
