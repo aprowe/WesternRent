@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
     logger.debug House.first.rent
     logger.debug @user.name
     @admin = (@user.name.to_s == House.first.rent.to_s)
+    @utilities = (@user.name.to_s == House.first.utilities.to_s)
 
   end
 
@@ -79,6 +80,20 @@ class ApplicationController < ActionController::Base
     render text: 'fail'
   end
 
+  def postUtilities
+
+    logger.debug params
+    if params[:amount]
+      util = Utilities.create
+      util.amount = params[:amount].to_f
+      util.save
+      render text: 'success'
+      return
+    end
+
+    render text: 'fail'
+  end
+
   def sendTexts
     require "uri"
     require "net/http"
@@ -117,19 +132,28 @@ class ApplicationController < ActionController::Base
 
   def login
     @error = ''
+    @username = ''
 
     if params[:username]
       user = Renter.find_by_name( params[:username] )
 
-      if user and user.password == params[:password]
-          session[:user] = user
-          redirect_to ''
-          return
+      if user
+
+        if user.password.to_s == params[:password].to_s || user.password.to_s == ''
+            session[:user] = user
+            redirect_to ''
+            return
+        end
+
       end
+
+      @username = params[:username]
     
-      @error = 'incorrect name or password'
     end
 
+
+
+    @error = 'incorrect name or password'
   end
 
 
@@ -151,6 +175,14 @@ class ApplicationController < ActionController::Base
 
   def adminUser
     if session[:user] == House.first.rent
+        return true
+    end
+
+    return false
+  end
+
+  def utilityUser
+    if session[:user] == House.first.utilities
         return true
     end
 

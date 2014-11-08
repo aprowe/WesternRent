@@ -1,11 +1,13 @@
 class Renter < ActiveRecord::Base
 	belongs_to :room, -> {where rentable: true}
-	has_many :comments;
+	# has_many :comments;
 	# before_save :default
 
 
 	def rent
-		return self.room.rent
+		util = Utilities.last.perPerson
+
+		return self.room.rent + util
 	end
 
 	def default_room
@@ -23,11 +25,19 @@ class Renter < ActiveRecord::Base
 	end
 
 	def status 
+		if self.admin?
+			return 'admin'
+		end
+
 		if self.paid
 			return 'paid'
 		else
 			return 'unpaid'
 		end
+	end
+
+	def admin?
+		return (House.first.rent.to_s == self.name.to_s)
 	end
 
 	def image_path

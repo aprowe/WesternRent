@@ -1,0 +1,38 @@
+@import "partial/colors";
+
+#utilities-panel {
+	box-sizing: border-box;
+	width: 100%;
+	border: 1px solid black;
+	border-radius: 2px;
+	padding: 15px;
+	padding-top: 0px;
+
+
+
+	.amount {
+		font-size: 150%;
+		color: $yellow;
+	}
+
+	.amountPer {
+
+		strong {
+			color: $yellow;
+		}
+	}
+
+	.row {
+		margin: 10px 0px;
+
+		&.input {
+			display: none;
+		}
+	}
+
+	margin-bottom: 20px;
+
+	input {
+		margin-right: 5px;
+	}
+}

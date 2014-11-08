@@ -11,7 +11,12 @@ a#settings.fa.fa-cog
 	#left-content.column
 		- if @admin
 			#admin-panel
+
+		- if @utilities
+			= render 'utilitiesPanel'
+
 		= render 'activity'
+
 
 	#right-content.column
 		= render 'profile', renter: @user

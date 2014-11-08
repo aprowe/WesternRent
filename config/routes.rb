@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'post' => 'application#post'
 
   get 'changePassword' => 'application#changePassword'
+  
+  get 'postUtilities' => 'application#postUtilities'
 
   get 'resetRent' => 'application#resetRent'
   get 'calcRent' => 'application#calcRent'

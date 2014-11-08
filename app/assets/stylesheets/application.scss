@@ -4,6 +4,7 @@
  *= require font-awesome
  *= require login
  *= require profile
+ *= require utilities
  *= require activity
  *= require_self
  */
@@ -29,8 +30,8 @@ a {
 }
 
 button, input[type="submit"], .button {
-	border-radius: 3px;
-	border: 1px solid rgba(white, 0.5);
+	border-radius: 300px;
+	border: 1px solid rgba(white, 0.1);
 	background: $blue;
 	color: white;
 	cursor: pointer;
@@ -38,7 +39,7 @@ button, input[type="submit"], .button {
 	padding: 3px 7px;
 
 	&:hover {
-		background: lighten($blue, 10%);
+		background: lighten($blue, 3%);
 	}
 
 }

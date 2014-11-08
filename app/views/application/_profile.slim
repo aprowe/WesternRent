@@ -28,10 +28,18 @@
 			- if @admin
 				a.fa.fa-check.paid-link.edit 
 			.status class='#{renter.status}'
-				- if renter.paid
-					span.fa.fa-check
-				- else
-					span.fa.fa-times
+				- if renter.admin?
+					span rent collector
+				- else 
+					- if renter.paid
+						span.fa.fa-check
+					- else
+						span.fa.fa-times
+
+		- if not small
+			.utilities.row
+				.amount $#{Utilities.last.perPerson}  
+				| in utilities (included)
 
 - if not small
 	.phone-field.row
