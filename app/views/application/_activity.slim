@@ -7,7 +7,7 @@
 		.submit submit
 		.clear
 
-	.comments
+	.comments last='#{Comments.last.id}'
 		- Comments.all.reverse_order.take(20).each do |comment|
 			= render 'comment', comment: comment
 
@@ -20,10 +20,22 @@ coffee:
 			date = moment(date).fromNow()
 			$(this).html(date)
 		
+	updateComments = ->
+		comments = $('#activity .comments')
+		$.ajax
+			url: 'getComments'
+			data:
+				last: comments.attr('last')
+			success: (data)->
+				if data.comments
+					comments.prepend( $(data.comments) )
+					comments.attr('last', data.last)
+
 	updateTime()
 
 	Loop = ->
 		setTimeout ->
+			updateComments()
 			updateTime()
 			Loop()
 		, 5000
@@ -38,8 +50,7 @@ coffee:
 				message: $('.post-field textarea').val()
 			success: (data)->
 				$('.post-field textarea').val('')
-				$('#activity .comments')
-				.prepend $(data).css('opacity', 0).animate
-					opacity: 1
-				, 300
+				updateComments()
+				updateTime()
+
 

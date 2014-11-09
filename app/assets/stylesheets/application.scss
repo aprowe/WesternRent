@@ -6,6 +6,7 @@
  *= require profile
  *= require utilities
  *= require activity
+ *= require expenses
  *= require_self
  */
 
@@ -97,7 +98,7 @@ button, input[type="submit"], .button {
 
 #settings {
 	@extend #logout;
-	margin-top: 13px;
+	margin: 10px;
 }
 
 #content {

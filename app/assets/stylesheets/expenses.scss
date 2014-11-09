@@ -1,0 +1,105 @@
+@import "partial/colors";
+@import "partial/normalize";
+
+#expenses  {
+	@extend .box;
+	padding: 0px;
+
+
+	.header {
+		padding-left: 10px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	table {
+		width: 100%;
+		border-spacing: 0px;
+		border-top: $border;
+		border-bottom: $border;
+
+		thead {
+			
+			th {
+				padding: 5px 0px;
+				border-bottom: $border;
+			}
+		}
+
+		td {
+			text-align: center;
+			margin: 0px;
+
+			&.price {
+				color: $yellow;
+				font-size: 120%;
+			}
+
+			&.name {
+				font-size: 90%;
+				opacity: 0.8;
+				.delete {
+				margin-left: 5px;
+				float: left;
+				}
+			}
+
+		}
+
+		tr {
+			&:nth-child(even), th {
+				background: darken($blue, 5%);
+			}
+		}	
+
+		tfoot {
+			tr:first-child td{
+				border-top: $border;
+			}
+		}
+	}
+	
+	.row {
+		padding: 10px;
+	}
+
+	.post {
+		float: right;
+	}
+
+	.refresh {
+		display: none;
+	}
+
+	#expense-form {
+		display: none;
+
+		label {
+			display: inline-block;
+			width: 100px;
+		}
+
+		input[type="field"] {
+			color: inherit;
+			font-size: 120%;
+			
+			border-radius: $border-radius;
+			border: $border;
+			
+			background: lighten($blue, 2%);
+			padding: $padding;
+
+			&.price {
+				width: 75px;
+			}
+
+		}
+
+
+	}
+
+}
+
+.clear {
+	clear: both;
+}

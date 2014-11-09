@@ -1,0 +1,69 @@
+
+#expenses
+	h2.header Expenses
+
+	table
+		/ thead
+		/ 	tr 
+		/ 		th Poster
+		/ 		th Description
+		/ 		th Price
+		tbody
+			- Expense.all.each do |expense|
+				= render expense
+			
+
+		tfoot
+			tr
+				td Total
+				td 
+				td.price $#{Expense.total.to_i}
+			tr
+				td Per Person
+				td 
+				td.price $#{Expense.perPerson.to_i}
+
+	.row
+		span#post.button Post Expense
+		a.refresh.button href='' Refresh Prices
+		.clear
+
+	form#expense-form action="createExpense"
+		.row
+			label Description
+			input type='field' name='description'
+		.row
+			label Price
+			input.price type='field' name='price'
+		.row
+			input.button#submit type='submit' value='Submit'
+
+
+coffee:
+	expenses = $ '#expenses'
+	expenses.find('#post').click ->
+		expenses.find '#expense-form'
+		.slideToggle()
+
+	deleteHandler = ->
+		id = $(this).closest('tr').attr('id')
+		$.ajax
+			url: 'deleteExpense'
+			data:
+				id: id
+			success: (data)=>
+				if data == 'success'
+					$(this).closest('tr').remove()
+	
+	form = $('#expense-form')
+	form.ajaxForm 
+		url: 'createExpense'
+		type: 'get'
+		success: (data)->
+			expenses.find('.delete').click deleteHandler
+			expenses.find('tbody').append $(data)
+			expenses.find('.refresh').show()
+			form[0].reset()
+
+		
+	expenses.find('.delete').click deleteHandler

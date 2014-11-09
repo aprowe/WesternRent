@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
   # end
 
   def index
-
-    @user = self.user
+    @user = user
 
     if not @user
       return redirect_to action: 'login'
@@ -18,14 +17,13 @@ class ApplicationController < ActionController::Base
 
     @renters = Renter.all.where.not({name: session[:user] })
 
-    logger.debug House.first.rent
-    logger.debug @user.name
-    @admin = (@user.name.to_s == House.first.rent.to_s)
-    @utilities = (@user.name.to_s == House.first.utilities.to_s)
-
   end
 
   def user
+    return Renter.find_by_name( session[:user] )
+  end
+
+  def self.user
     return Renter.find_by_name( session[:user] )
   end
 
@@ -54,6 +52,23 @@ class ApplicationController < ActionController::Base
     renter.phone = params[:phone]
     renter.save
     render text: 'ok'
+  end
+
+  def getComments
+    starting = params[:last].to_i
+    string = ''
+
+    comments = Comments.
+      where('id > ?', starting).
+      reverse_order
+
+    comments.each do |comment|
+      string += render_to_string partial: 'comment', locals: {comment: comment}
+    end
+
+    @return = {comments: string, last: Comments.last.id}
+
+    render json: @return
   end
 
   def changePassword
@@ -149,11 +164,11 @@ class ApplicationController < ActionController::Base
 
       @username = params[:username]
     
+    @error = 'incorrect name or password'
     end
 
 
 
-    @error = 'incorrect name or password'
   end
 
 
@@ -187,6 +202,26 @@ class ApplicationController < ActionController::Base
     end
 
     return false
+  end
+
+  def createExpense
+    if params[:description] and params[:price]
+      expense = Expense.create
+      expense.renter = user
+      expense.amount = params[:price]
+      expense.description = params[:description]
+      expense.save
+      render expense
+    else
+      render text: 'failure'
+    end
+
+  end
+
+  def deleteExpense
+    expense = Expense.find(params[:id])
+    expense.delete
+    render text: 'success'
   end
 
   def resetRent

@@ -14,4 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require moment
+//= require jqueryform.js
 //= require_tree .
+
+isNum = function(n){
+	return !isNaN(parseFloat(n)) && isFinite(n);
+}

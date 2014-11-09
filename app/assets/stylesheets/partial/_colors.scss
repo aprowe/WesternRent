@@ -9,6 +9,9 @@ $red: red;
 $darkGray: #3b3b3b;
 
 
+$border: 1px solid rgba(black, 0.5);
+
+
 @mixin hover() {
 	cursor: pointer;
 	transition: color .2s;

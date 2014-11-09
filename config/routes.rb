@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   
   get 'postUtilities' => 'application#postUtilities'
 
+  get 'getComments' => 'application#getComments'
+
+  get 'createExpense' => 'application#createExpense'
+  get 'deleteExpense' => 'application#deleteExpense'
+
   get 'resetRent' => 'application#resetRent'
   get 'calcRent' => 'application#calcRent'
   get 'adminLogin' => 'application#adminLogin'

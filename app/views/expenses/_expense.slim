@@ -1,0 +1,10 @@
+- @user ||= false
+
+tr id='#{expense.id}'
+	td.name
+		- if expense.edit? @user
+			a.fa.fa-times.delete title="delete"
+		| #{expense.renter}
+	td.description #{expense.description}
+	td.price $#{expense.amount.to_i}
+

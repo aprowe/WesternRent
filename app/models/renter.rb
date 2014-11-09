@@ -1,5 +1,6 @@
 class Renter < ActiveRecord::Base
 	belongs_to :room, -> {where rentable: true}
+	has_many :expenses
 	# has_many :comments;
 	# before_save :default
 
@@ -7,7 +8,14 @@ class Renter < ActiveRecord::Base
 	def rent
 		util = Utilities.last.perPerson
 
-		return self.room.rent + util
+		expenses = Expense.perPerson
+
+		paidFor = 0
+		self.expenses.each do |e|
+			paidFor += e.amount
+		end
+
+		return (self.room.rent + util + expenses - paidFor + 0.5).to_i
 	end
 
 	def default_room
@@ -38,6 +46,11 @@ class Renter < ActiveRecord::Base
 
 	def admin?
 		return (House.first.rent.to_s == self.name.to_s)
+	end
+
+
+	def utilities?
+		return (self.name.to_s == House.first.utilities.to_s)
 	end
 
 	def image_path

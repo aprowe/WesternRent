@@ -3,9 +3,9 @@
 #utilities-panel
 	h1.header Utilities Panel
 	.row currently posted: 
-	.row.amount $#{Utilities.last.amount.to_i}
+	.row.amount $#{Utilities.last.amount}
 	.row.amountPer 
-		strong $#{Utilities.last.perPerson.to_i} 
+		strong $#{Utilities.last.perPerson} 
 		| per person
 	a.row.button.post-utilities post utilities
 	.row.input
@@ -14,6 +14,10 @@
 
 coffee:
 	
+
+	isNumeric = (n)->
+		!isNaN parseFloat(n) and isFinite n
+
 	panel = $('#utilities-panel')
 	panel.find('.post-utilities').click ->
 		panel.find('#utilities-amount')
@@ -22,7 +26,7 @@ coffee:
 
 		val = panel.find('#utilities-amount').val()
 
-		if not isNum val
+		if not isNumeric val
 			return
 
 		$.ajax

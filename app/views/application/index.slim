@@ -3,16 +3,18 @@
 #slider
 
 a#logout href='logout' logout
-a#settings.fa.fa-cog
+a#settings.fa.fa-cog.rotate
 
 #log
 
 #content
 	#left-content.column
-		- if @admin
+		= render 'expenses'
+
+		- if @user.admin?
 			#admin-panel
 
-		- if @utilities
+		- if @user.utilities?
 			= render 'utilitiesPanel'
 
 		= render 'activity'
