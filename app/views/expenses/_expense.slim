@@ -6,5 +6,5 @@ tr id='#{expense.id}'
 			a.fa.fa-times.delete title="delete"
 		| #{expense.renter}
 	td.description #{expense.description}
-	td.price $#{expense.amount.to_i}
+	td.price $#{expense.amount.round(2)}
 

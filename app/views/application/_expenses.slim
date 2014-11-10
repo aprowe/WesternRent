@@ -17,11 +17,11 @@
 			tr
 				td Total
 				td 
-				td.price $#{Expense.total.to_i}
+				td.price $#{Expense.total.round(2)}
 			tr
 				td Per Person
 				td 
-				td.price $#{Expense.perPerson.to_i}
+				td.price $#{Expense.perPerson.round(2)}
 
 	.row
 		span#post.button Post Expense

@@ -3,9 +3,9 @@
 #utilities-panel
 	h1.header Utilities Panel
 	.row currently posted: 
-	.row.amount $#{Utilities.last.amount.to_i}
+	.row.amount $#{Utilities.last.amount.round(2)}
 	.row.amountPer 
-		strong $#{Utilities.last.perPerson.to_i} 
+		strong $#{Utilities.last.perPerson.round(2)} 
 		| per person
 	a.row.button.post-utilities post utilities
 	.row.input
