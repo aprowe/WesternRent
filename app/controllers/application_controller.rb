@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       return redirect_to action: 'login'
     end
 
-    @renters = Renter.all.where.not({name: session[:user] })
+    @renters = Renter.all.where.not({id: user.id})
 
   end
 
@@ -40,11 +40,6 @@ class ApplicationController < ActionController::Base
 
     render partial: 'comment', locals: {comment: comment}
     return
-  end
-
-  def adminLogin
-    session[:user] = 'Alexander Rowe'
-    redirect_to ''
   end
 
   def updatePhone 
@@ -149,13 +144,28 @@ class ApplicationController < ActionController::Base
     @error = ''
     @username = ''
 
+    if cookies.signed[:user_id]
+      user = Renter.find( cookies.signed[:user_id] )
+      cookies.signed[:user_id] = { value: user.id, expires: 1.month.from_now }
+      session[:user] = user
+      redirect_to ''
+      return
+    end
+
+
+
     if params[:username]
       user = Renter.find_by_name( params[:username] )
 
-      if user
+      unless user
+        user = Renter.find_by_username ( params[:username] )
+      end
+
+      if user 
 
         if user.password.to_s == params[:password].to_s || user.password.to_s == ''
             session[:user] = user
+            cookies.signed[:user_id] = { value: user.id, expires: 1.month.from_now }
             redirect_to ''
             return
         end
@@ -173,7 +183,6 @@ class ApplicationController < ActionController::Base
 
 
   def upload
-    user = Renter.first
 
     uploaded_io = params[:picture]
     File.open(Rails.root.join('public', 'uploads', "#{user.id}.png"), 'wb') do |file|
@@ -184,24 +193,9 @@ class ApplicationController < ActionController::Base
   end
 
   def logout
+    cookies.delete :user_id
     reset_session
     redirect_to action: 'login'
-  end
-
-  def adminUser
-    if session[:user] == House.first.rent
-        return true
-    end
-
-    return false
-  end
-
-  def utilityUser
-    if session[:user] == House.first.utilities
-        return true
-    end
-
-    return false
   end
 
   def createExpense
