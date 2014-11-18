@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-
+  # filter_parameter_logging :password
 
   # def admin?
   #   return true
@@ -69,9 +69,9 @@ class ApplicationController < ActionController::Base
   def changePassword
     if params[:password]
       user = self.user
-      user.password = params[:password]
+      user.new_password = params[:password]
       user.save
-      render text: "password changed to #{user.password}"
+      render text: ""
       return
     end
 
@@ -152,29 +152,37 @@ class ApplicationController < ActionController::Base
       return
     end
 
+    user = Renter.authenticate(params[:username], params[:password])
 
+    if user
+      session[:user] = user
+      cookies.signed[:user_id] = { value: user.id, expires: 1.month.from_now }
+      redirect_to ''
+      return
+    end
 
-    if params[:username]
-      user = Renter.find_by_name( params[:username] )
+    # if params[:username]
+    #   user = Renter.find_by_name( params[:username] )
 
-      unless user
-        user = Renter.find_by_username ( params[:username] )
-      end
+    #   unless user
+    #     user = Renter.find_by_username ( params[:username] )
+    #   end
 
-      if user 
+    #   if user 
 
-        if user.password.to_s == params[:password].to_s || user.password.to_s == ''
-            session[:user] = user
-            cookies.signed[:user_id] = { value: user.id, expires: 1.month.from_now }
-            redirect_to ''
-            return
-        end
+    #     if user.password.to_s == params[:password].to_s || user.password.to_s == ''
+    #         session[:user] = user
+    #         cookies.signed[:user_id] = { value: user.id, expires: 1.month.from_now }
+    #         redirect_to ''
+    #         return
+    #     end
 
-      end
+    #   end
 
-      @username = params[:username]
+    #   @username = params[:username]
     
-    @error = 'incorrect name or password'
+    if params[:username] or params[:password]
+      @error = 'incorrect name or password'
     end
 
 

@@ -1,9 +1,30 @@
+require 'bcrypt'
+
 class Renter < ActiveRecord::Base
 	belongs_to :room, -> {where rentable: true}
 	has_many :expenses
-	# has_many :comments;
-	# before_save :default
 
+	before_save :hash_new_password, :if=>:password_changed?
+	attr_accessor :new_password
+	validates_confirmation_of :new_password, :if=>:password_changed?
+
+	def password_changed?
+    	!@new_password.blank?
+    end
+
+	def hash_new_password
+		self.password = BCrypt::Password.create(@new_password)
+	end
+
+	def self.authenticate(username, password)
+	  if user = find_by_username(username)
+	    if BCrypt::Password.new(user.password).is_password? password
+	      return user
+	    end
+	  end
+
+	  return nil
+	end
 
 	def rent
 		util = Utilities.last.perPerson
@@ -45,12 +66,12 @@ class Renter < ActiveRecord::Base
 	end
 
 	def admin?
-		return (House.first.rent.to_s == self.name.to_s)
+		return (House.first.rent.id == id)
 	end
 
 
 	def utilities?
-		return (self.name.to_s == House.first.utilities.to_s)
+		return (id == House.first.utilities.id)
 	end
 
 	def image_path

@@ -29,7 +29,7 @@ a#settings.fa.fa-cog.rotate
 #settings-bar
 	.submit
 	a.change-password.right change password
-	input.password
+	input.password type="password"
 	coffee:
 		$('#settings-bar .change-password').click ->
 			input = $('#settings-bar').find('input').slideToggle()
@@ -42,7 +42,7 @@ a#settings.fa.fa-cog.rotate
 						input.val('')
 						$('#log').append(data);
 
-	-if @admin 
+	-if @user.admin?
 		a.message-all text everyone
 
 

@@ -197,6 +197,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   autoprefixer-rails
+  bcrypt
   coffee-rails (~> 4.0.0)
   compass
   devise

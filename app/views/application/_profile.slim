@@ -25,7 +25,7 @@
 		.price
 			i.fa.fa-usd
 			.amount #{renter.rent}
-			- if @admin
+			- if @user.admin?
 				a.fa.fa-check.paid-link.edit 
 			.status class='#{renter.status}'
 				- if renter.admin?
