@@ -14,4 +14,4 @@
 /tmp
 /.sass-cache
 /public/uploads
-/db
+*.sqlite3
