@@ -18,12 +18,22 @@ class Renter < ActiveRecord::Base
 
 	def self.authenticate(username, password)
 	  if user = find_by_username(username)
+	  	if user.new_password?
+	  		@new_password = password
+	  		user.save
+	  		return user
+	  	end
+
 	    if BCrypt::Password.new(user.password).is_password? password
 	      return user
 	    end
 	  end
 
 	  return nil
+	end
+
+	def new_password?
+		self.password.length < 5
 	end
 
 	def rent
