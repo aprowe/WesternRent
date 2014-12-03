@@ -9,6 +9,17 @@ a#settings.fa.fa-cog.rotate
 
 #content
 	#left-content.column
+		#notification.box
+			- if @user.paid?
+				h2 
+					| You have 
+					strong.green paid!
+			- else
+				h2 Notice
+				p You can pay with cash, check or paypal. </br>Make a check out to <strong>#{House.first.rent}</strong> or send paypal cash to <strong>aprowe@ucsc.edu</strong>
+				button
+					a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_send-money&email=aprowe@ucsc.edu&amount=#{@user.rent}" target="_blank" pay with paypal
+
 		= render 'expenses'
 
 		- if @user.admin?
@@ -62,7 +73,7 @@ coffee:
 
 	$('#settings-bar').slider($('#settings'))
 
-- if @admin
+- if @user.admin?
 	coffee:
 		$('.phone .number').addClass('messager').click ->
 			$.ajax

@@ -113,7 +113,7 @@ class ApplicationController < ActionController::Base
     Renter.
       where( {paid: false} ).where.not( phone: false ).each do |renter|
 
-        message = "Dear #{renter.name}, this months rent is $#{renter.rent}. Make a check out to #{House.first.rent}, or paypal to aprowe@ucsc.edu. Thanks!"
+        message = "Dear #{renter.name}, this months rent is $#{renter.rent}, including utilities. Make a check out to #{House.first.rent}, or paypal to aprowe@ucsc.edu. Thanks!"
 
         params = {message: message, number: renter.phone}
         x = Net::HTTP.post_form(URI.parse('http://textbelt.com/text'), params)
@@ -131,7 +131,7 @@ class ApplicationController < ActionController::Base
   def messageUser
     renter = Renter.find params[:renter_id]
 
-    message = "Dear #{renter.name}, this months rent is $#{renter.rent}. Make a check out to #{House.first.rent}, or paypal to aprowe@ucsc.edu. Thanks!"
+    message = "Dear #{renter.name}, this months rent is $#{renter.rent}, including utilities. Make a check out to #{House.first.rent}, or paypal to aprowe@ucsc.edu. Thanks!"
 
     params = {message: message, number: renter.phone}
     x = Net::HTTP.post_form(URI.parse('http://textbelt.com/text'), params)

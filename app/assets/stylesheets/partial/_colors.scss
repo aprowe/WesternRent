@@ -8,7 +8,6 @@ $red: red;
 
 $darkGray: #3b3b3b;
 
-
 $border: 1px solid rgba(black, 0.5);
 
 
@@ -24,4 +23,11 @@ $border: 1px solid rgba(black, 0.5);
 @mixin image() {
 	background-size: cover;
 	background-position: center;
+}
+
+.green{
+	color: $green;
+}
+.yellow{
+	color: $yellow;
 }
