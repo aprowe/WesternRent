@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'profile' => 'application#profile'
   post 'upload' => 'application#upload'
   get 'updatePhone' => 'application#updatePhone'
+  get 'gopro' => 'application#gopro'
   
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

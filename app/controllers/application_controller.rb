@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
   #   return true
   # end
 
+  def gopro
+    session[:user] = 'Go Pro'
+    redirect_to ''
+  end
+
   def index
     @user = user
 
@@ -20,11 +25,11 @@ class ApplicationController < ActionController::Base
   end
 
   def user
-    return Renter.find_by_name( session[:user] )
+    return Renter.find_by_name session[:user]
   end
 
   def self.user
-    return Renter.find_by_name( session[:user] )
+    return Renter.find_by_name session[:user]
   end
 
 

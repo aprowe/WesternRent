@@ -17,7 +17,9 @@ class Renter < ActiveRecord::Base
 	end
 
 	def self.authenticate(username, password)
+
 	  if user = find_by_username(username)
+
 	  	if user.new_password?
 	  		@new_password = password
 	  		user.save

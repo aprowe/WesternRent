@@ -9,6 +9,15 @@ a#settings.fa.fa-cog.rotate
 
 #content
 	#left-content.column
+		#gopro.box
+			- if @user.username == 'gopro'
+				h2.yellow Welcome Go Pro!
+				p Here is the website I created for managing and collecting the rent of my crowded house.
+				| This app was built with rails, slim, sass and some other gems. Try leaving a comment!
+			- else
+				h2.yellow Notice
+				p I applied to Go Pro and linked this website to them, so I temporarily made them an account to see.
+				| To them, your info is hidden!
 		#notification.box
 			- if @user.paid?
 				h2 

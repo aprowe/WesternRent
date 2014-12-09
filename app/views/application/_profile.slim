@@ -12,13 +12,19 @@
 
 	.info
 		.name 
-			| #{renter.name}
+			- if @user.username == 'gopro' and renter.username != 'gopro'
+				| [Name Hidden]
+			- else 
+				| #{renter.name}
 		.room 
 			i.fa.fa-home
 			| #{renter.room}
 		.phone
 			i.fa.fa-phone
-			.number #{renter.phone}
+			- if @user.username == 'gopro'
+				.number 123 456 7890
+			- else
+				.number #{renter.phone}
 			- if not small
 				a.fa.fa-edit.edit
 
