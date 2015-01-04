@@ -18,7 +18,9 @@ class Expense < ActiveRecord::Base
 	end
 
 	def edit?(user)
-		if not user
+		if House.confirmed?
+			return false
+		elsif not user
 			return false
 		elsif user.admin?
 			return true

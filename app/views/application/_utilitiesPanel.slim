@@ -7,10 +7,11 @@
 	.row.amountPer 
 		strong $#{Utilities.last.perPerson.round(2)} 
 		| per person
-	a.row.button.post-utilities post utilities
-	.row.input
-		input#utilities-amount
-		a.button.submit submit
+	- if House.unconfirmed?
+		a.row.button.post-utilities post utilities
+		.row.input
+			input#utilities-amount
+			a.button.submit submit
 
 coffee:
 	

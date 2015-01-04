@@ -23,7 +23,7 @@ a#settings.fa.fa-cog.rotate
 		= render 'expenses'
 
 		- if @user.admin?
-			#admin-panel
+			= render 'adminPanel'
 
 		- if @user.utilities?
 			= render 'utilitiesPanel'

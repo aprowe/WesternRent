@@ -10,6 +10,14 @@ class House < ActiveRecord::Base
     	@area = calc_area
     end
 
+    def self.confirmed?
+        return House.first.confirmed
+    end
+
+    def self.unconfirmed?
+        return !House.first.confirmed
+    end
+
     def calc_area
 	    sum = 0
 

@@ -24,9 +24,10 @@
 				td.price $#{Expense.perPerson.round(2)}
 
 	.row
-		span#post.button Post Expense
-		a.refresh.button href='' Refresh Prices
-		.clear
+		- if House.unconfirmed?
+			span#post.button Post Expense
+			a.refresh.button href='' Refresh Prices
+			.clear
 
 	form#expense-form action="createExpense"
 		.row

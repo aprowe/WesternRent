@@ -1,11 +1,19 @@
-
 #admin-panel.box
 	h2 Admin Panel
-	button.reset-button Reset Rent
-	button.calc-button Calculate Rent
-	button.message-button Send Texts
+	.row
+		h3 
+			| Utilities: 
+			strong $#{Utilities.last.amount.round(2)}
+	.row
+		button.reset-button Reset Rent
+		button.calc-button Calculate Rent
+		button.message-button Send Texts
 	.clear
-	#status
+	- if House.confirmed?
+		button.confirm-button Unconfirm Payment
+	- if House.unconfirmed?
+		button.confirm-button Confirm Payment
+	#status 
 
 coffee:
 	$ ->
@@ -42,6 +50,12 @@ coffee:
 				url: 'sendTexts'
 				success: (data)->
 					$('<div>Done!</div>').appendTo '#admin-panel'
+
+		$('.confirm-button').click ->
+			$.ajax
+				url: 'confirmHouse'
+				success: (data)->
+					$('#status').html('Confirmed')
 
 scss:
 	#status {
