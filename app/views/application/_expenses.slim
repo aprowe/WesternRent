@@ -11,9 +11,13 @@
 		tbody
 			- Expense.all.each do |expense|
 				= render expense
-			
+
 
 		tfoot
+			tr 
+				td Utilities
+				td 
+				td.price $#{Utilities.last.amount.round 2}
 			tr
 				td Total
 				td 

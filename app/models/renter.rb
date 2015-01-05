@@ -37,7 +37,7 @@ class Renter < ActiveRecord::Base
 	end
 
 	def rent
-		util = Utilities.last.perPerson
+		# util = Utilities.last.perPerson
 
 		expenses = Expense.perPerson
 
@@ -46,7 +46,7 @@ class Renter < ActiveRecord::Base
 			paidFor += e.amount
 		end
 
-		return (self.room.rent + util + expenses - paidFor + 0.5).to_i
+		return (self.room.rent + expenses - paidFor + 0.5).to_i
 	end
 
 	def default_room
