@@ -9,7 +9,8 @@ class Expense < ActiveRecord::Base
 			sum += expense.amount
 		end
 
-		return sum
+		sum += Utilities.last.amount
+		return sum	
 	end
 
 	def self.perPerson

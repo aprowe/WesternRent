@@ -24,7 +24,7 @@
 
 		.price
 			i.fa.fa-usd
-			.amount #{renter.rent}
+			.amount title="$#{renter.room.rent.to_i} base room rate" #{renter.rent} 
 			- if @user.admin?
 				a.fa.fa-check.paid-link.edit 
 			.status class='#{renter.status}'
@@ -38,8 +38,8 @@
 
 		- if not small
 			.utilities.row
-				.amount $#{Utilities.last.perPerson.to_i}  
-				| in utilities (included)
+				.amount $#{renter.room.rent.to_i}  
+				| base room rate
 
 - if not small
 	.phone-field.row
