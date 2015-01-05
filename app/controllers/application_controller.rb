@@ -20,12 +20,10 @@ class ApplicationController < ActionController::Base
   end
 
   def user
-    return Renter.find_by_username 'whastings'
     return Renter.find_by_name( session[:user] )
   end
 
   def self.user
-    return Renter.find_by_username 'whastings'
     return Renter.find_by_name( session[:user] )
   end
 
