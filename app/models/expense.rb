@@ -15,6 +15,7 @@ class Expense < ActiveRecord::Base
 
 	def self.perPerson
 		pp = total / Renter.all.count.to_f
+		pp += Utilities.last.perPerson
 		return pp
 	end
 
