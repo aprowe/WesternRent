@@ -115,7 +115,7 @@ strong {
 		content: '';
 		clear: both;
 	}
-	width: $width;
+	width: 80%;
 	margin: auto;
 }
 
@@ -125,12 +125,44 @@ strong {
 	float: left;
 
 	&#left-content {
-		width: $width * 0.4;
+		width: 40%;
+		// width: $width * 0.4;
 	}
 
 	&#right-content {
-		width: $width * 0.6;
+		width: 60%;
+		// width: $width * 0.6;
 	}
 	// width: $width / 2;
 	// height: 200px;
 }
+
+
+@media (max-width: 950px) {
+	#content {
+		width: 100%;
+	}
+
+	.column {
+		width: 100% !important;
+		float: right !important;
+	}
+
+	 #activity {
+	 	display: none;
+	 }
+}
+
+
+@media (max-width: 500px) {
+
+	.profile {
+		font-size: 100%;
+	}
+
+	 .profile.small {
+	 	width: 100%;
+	 }
+}
+
+
