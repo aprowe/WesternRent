@@ -10,7 +10,10 @@ a#settings.fa.fa-cog.rotate
 #content
 	#left-content.column
 		#notification.box
-			- if @user.paid?
+			- if House.unconfirmed?
+				h2.yellow Rent has not been posted yet. 
+				h3 Sit tight.
+			- elsif @user.paid?
 				h2 
 					| You have 
 					strong.green paid!

@@ -9,6 +9,10 @@ class Renter < ActiveRecord::Base
 	validates_confirmation_of :new_password, :if=>:password_changed?
 
 	def password_changed?
+		if password.blank?
+			@new_password = 'password'
+		end
+		
     	!@new_password.blank?
     end
 
@@ -18,6 +22,7 @@ class Renter < ActiveRecord::Base
 
 	def self.authenticate(username, password)
 	  if user = find_by_username(username)
+	  	return user
 	  	if user.new_password?
 	  		@new_password = password
 	  		user.save

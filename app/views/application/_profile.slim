@@ -22,24 +22,32 @@
 			- if not small
 				a.fa.fa-edit.edit
 
-		.price
-			i.fa.fa-usd
-			.amount title="$#{renter.room.rent.to_i} base room rate" #{renter.rent} 
-			- if @user.admin?
-				a.fa.fa-check.paid-link.edit 
-			.status class='#{renter.status}'
-				- if renter.admin?
-					span rent collector
-				- else 
-					- if renter.paid
-						span.fa.fa-check
-					- else
-						span.fa.fa-times
+		- if House.confirmed?
+			.price
+				i.fa.fa-usd
+				.amount title="$#{renter.room.rent.to_i} base room rate" #{renter.rent} 
 
-		- if not small
+				- if @user.admin?
+					a.fa.fa-check.paid-link.edit 
+
+				.status class='#{renter.status}'
+					- if renter.admin?
+						span rent collector
+					- else 
+						- if renter.paid
+							span.fa.fa-check
+						- else
+							span.fa.fa-times
+
+		- if House.unconfirmed? and not small
+			.row.yellow 
+				strong Price TBD
+
+		- if House.unconfirmed? or not small
 			.utilities.row
 				.amount $#{renter.room.rent.to_i}  
 				| base room rate
+
 
 - if not small
 	.phone-field.row

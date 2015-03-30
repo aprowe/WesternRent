@@ -9,6 +9,7 @@
 
 	.comments last='#{Comments.last.id}'
 		- Comments.all.reverse_order.take(20).each do |comment|
+			- next unless comment.renter != nil
 			= render 'comment', comment: comment
 
 coffee:

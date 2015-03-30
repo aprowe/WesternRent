@@ -1,2 +1,3 @@
 - @comments.each do |comment|
+	- next if comment.renter == nil
 	= render 'comment', comment: comment
