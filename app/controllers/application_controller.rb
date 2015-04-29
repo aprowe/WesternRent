@@ -104,34 +104,12 @@ class ApplicationController < ActionController::Base
     render text: 'fail'
   end
 
-  def sendTexts
-    require "uri"
-    require "net/http"
-
-
-    message = ''
-    Renter.
-      where( {paid: false} ).where.not( phone: false ).each do |renter|
-
-        message = "Dear #{renter.name}, this months rent is $#{renter.rent}, including utilities. Make a check out to #{House.first.rent}, or paypal to aprowe@ucsc.edu. Thanks!"
-
-        params = {message: message, number: renter.phone}
-        x = Net::HTTP.post_form(URI.parse('http://textbelt.com/text'), params)
-
-        logger.debug x
-        logger.debug "Message sent to #{renter.name}"
-
-        sleep 61
-    end
-
-    render text: 'Done'
-
-  end
-
   def messageUser
     renter = Renter.find params[:renter_id]
 
-    message = "Dear #{renter.name}, this months rent is $#{renter.rent}, including utilities. Make a check out to #{House.first.rent}, or paypal to aprowe@ucsc.edu. Thanks!"
+    message = "Dear #{renter.name}, this months rent is $#{renter.rent}, "+
+    "including utilities. Make a check out to #{House.first.rent},"+
+    " or paypal to #{AdminUser.first.email}. Thanks!"
 
     params = {message: message, number: renter.phone}
     x = Net::HTTP.post_form(URI.parse('http://textbelt.com/text'), params)

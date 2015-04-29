@@ -19,9 +19,9 @@ a#settings.fa.fa-cog.rotate
 					strong.green paid!
 			- else
 				h2 Notice
-				p You can pay with cash, check or paypal. </br>Make a check out to <strong>#{House.first.rent}</strong> or send paypal cash to <strong>aprowe@ucsc.edu</strong>
+				p You can pay with cash, check or paypal. </br>Make a check out to <strong>#{House.first.rent}</strong> or send paypal cash to <strong>#{AdminUser.first.email}</strong>
 				button
-					a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_send-money&email=aprowe@ucsc.edu&amount=#{@user.rent}" target="_blank" pay with paypal
+					a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_send-money&email=#{AdminUser.first.email}&amount=#{@user.rent}" target="_blank" pay with paypal
 
 		= render 'expenses'
 

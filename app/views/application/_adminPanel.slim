@@ -46,10 +46,17 @@ coffee:
 						css('opacity', 1)
 
 		$('.message-button').click ->
-			$.ajax
-				url: 'sendTexts'
-				success: (data)->
-					$('<div>Done!</div>').appendTo '#admin-panel'
+
+			i = 0
+			$('.unpaid')
+			.closest '.info'
+			.find '.phone .number' 
+			.each ->
+				that = this
+				setTimeout => 
+					that.click()
+				, i++ * 61000
+
 
 		$('.confirm-button').click ->
 			$.ajax
