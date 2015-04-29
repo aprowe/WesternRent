@@ -1,5 +1,4 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation
 
   index do
     selectable_column
@@ -27,8 +26,10 @@ ActiveAdmin.register AdminUser do
 
   controller do
     def permitted_params
-      params.permit post: [:title, :body, :meta_keywords, :meta_description, :excerpt, :image, category_ids: []]
+      params.permit admin_user: [:email, :password, :password_confirmation]
     end
   end
+
+  permit_params :email, :password, :password_confirmation
 
 end
