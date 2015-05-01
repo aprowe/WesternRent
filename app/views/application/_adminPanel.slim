@@ -5,14 +5,14 @@
 			| Utilities: 
 			strong $#{Utilities.last.amount.round(2)}
 	.row
-		button.reset-button Reset Rent
-		button.calc-button Calculate Rent
+		/ button.reset-button Reset Rent
+		/ button.calc-button Calculate Rent
 		button.message-button Send Texts
 	.clear
 	- if House.confirmed?
-		button.confirm-button Unconfirm Payment
+		button.confirm-button Unlock Expenses
 	- if House.unconfirmed?
-		button.confirm-button Confirm Payment
+		button.confirm-button Lock Expenses
 	#status 
 
 coffee:
@@ -62,7 +62,7 @@ coffee:
 			$.ajax
 				url: 'confirmHouse'
 				success: (data)->
-					$('#status').html('Confirmed')
+					$('#status').html data
 
 scss:
 	#status {

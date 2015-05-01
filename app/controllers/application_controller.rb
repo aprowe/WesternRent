@@ -206,18 +206,23 @@ class ApplicationController < ActionController::Base
 
   def resetRent
     Renter.update_all(paid: false)
-    render text: 'success'
   end
 
   def calcRent
     rent = House.first.calc_rents
-    render text: rent
   end
 
   def confirmHouse
     house = House.first
     house.confirmed = !house.confirmed
+
+    if house.confirmed
+      calcRent
+      resetRent
+    end
+
     house.save
+    render text: 'success'
   end
 
 
