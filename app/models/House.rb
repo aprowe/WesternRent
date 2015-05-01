@@ -30,7 +30,7 @@ class House < ActiveRecord::Base
 
 	    return sum
     end
-
+ 
     def shared_area
         shared_area = 0
         Room.where.not(:rentable => true).each do |room|
