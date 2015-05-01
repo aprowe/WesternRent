@@ -57,25 +57,27 @@ class House < ActiveRecord::Base
 
         if calc_total_rent < total_rent
             while calc_total_rent < total_rent
+                i += 1
+                if i > j
+                    i = 1
+                end
+                next unless Renter.find(i)
                 room = Renter.find(i).room
                 room.rent += 1
                 room.save
 
+            end
+        else
+            while calc_total_rent > total_rent
                 i += 1
                 if i > j
                     i = 1
                 end
-            end
-        else
-            while calc_total_rent > total_rent
+                next unless Renter.find(i)
                 room = Renter.find(i).room
                 room.rent -= 1
                 room.save
 
-                i += 1
-                if i > j
-                    i = 1
-                end
             end
         end
 
