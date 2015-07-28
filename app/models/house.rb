@@ -52,8 +52,8 @@ class House < ActiveRecord::Base
 
     def assign_random
         trim = calc_total_rent
-        i = rand(0..Renter.last.id).to_i
-        j = Renter.last.id.to_i
+        i = rand(Renter.count).to_i
+        j = Renter.count.to_i
 
         if calc_total_rent < total_rent
             while calc_total_rent < total_rent
@@ -61,8 +61,8 @@ class House < ActiveRecord::Base
                 if i > j
                     i = 1
                 end
-                next unless Renter.find(i)
-                room = Renter.find(i).room
+                next unless Renter.offset(i).first
+                room = Renter.offset(i).first.room
                 room.rent += 1
                 room.save
 
@@ -73,8 +73,8 @@ class House < ActiveRecord::Base
                 if i > j
                     i = 1
                 end
-                next unless Renter.find(i)
-                room = Renter.find(i).room
+                next unless Renter.offset(i).first
+                room = Renter.offset(i).first.room
                 room.rent -= 1
                 room.save
 
