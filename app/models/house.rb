@@ -52,8 +52,8 @@ class House < ActiveRecord::Base
 
     def assign_random
         trim = calc_total_rent
-        i = rand(1..Renter.count).to_i
-        j = Renter.count.to_i
+        i = rand(0..Renter.last.id).to_i
+        j = Renter.last.id.to_i
 
         if calc_total_rent < total_rent
             while calc_total_rent < total_rent

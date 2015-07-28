@@ -37,10 +37,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads')
 # Default value for keep_releases is 5
 set :keep_releases, 2
 
-role :web, "ubuntu@rent.rowealex.com"
-role :app, "ubuntu@rent.rowealex.com"
-role :db, "ubuntu@rent.rowealex.com"
-
 namespace :deploy do
 
   after :restart, :clear_cache do

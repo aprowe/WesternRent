@@ -5,9 +5,10 @@
 
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
-server 'rent.rowealex.com', user: 'ubuntu', roles: %w{db app web}
+server 'rentdemo.rowealex.com', user: 'ubuntu', roles: %w{db app web}
 
-
+set :deploy_to, '/home/ubuntu/RentDemo'
+set :stage, :demo
 
 # role-based syntax
 # ==================
